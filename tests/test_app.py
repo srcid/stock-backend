@@ -8,4 +8,4 @@ def test_root_path_should_return_status_200_and_hello_world():
     res = client.get('/')
 
     assert res.status_code == 200
-    assert res.json() == {'hello': 'world'}
+    assert res.json() == {'text': 'The quick fox jump over the lazy dog.'}
