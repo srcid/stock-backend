@@ -26,12 +26,12 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.blue]
-extend-exclude = '(migrations/)'
+include = "(stock_backend|tests)"
 
 [tool.isort]
 profile = "black"
 line_length = 79
-src_paths = ["stock_backend", "tests"]
+skip_glob = "[!(stock_backendtests|tests)]*"
 
 [tool.pytest.ini_options]
 pythonpath = "."
