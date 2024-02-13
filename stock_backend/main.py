@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from stock_backend.scehemes import (
+from stock_backend.schemes import (
     MessageScheme,
     UserDBScheme,
     UserPublicScheme,
