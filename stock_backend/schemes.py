@@ -15,7 +15,3 @@ class UserPublicScheme(BaseModel):
     id: int
     username: str
     email: EmailStr
-
-
-class UserDBScheme(UserScheme):
-    id: int
