@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+from http import HTTPStatus as st
 
 from stock_backend.schemes import (
     MessageScheme,
@@ -67,3 +68,16 @@ def update_user(
     session.refresh(db_user)
 
     return db_user
+
+
+@app.delete('/user/{user_id}', response_model=MessageScheme)
+def delete_user(user_id: int, session: Session = Depends(get_session)):
+    db_user = session.scalar(select(User).where(User.id == user_id))
+
+    if not db_user:
+        raise HTTPException(status_code=st.NOT_FOUND, detail='User not found')
+
+    session.delete(db_user)
+    session.commit()
+
+    return {'text': 'User was deleted'}
