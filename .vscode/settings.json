@@ -6,19 +6,4 @@
     "python.analysis.autoImportCompletions": true,
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
-    "[python]": {        
-        "editor.defaultFormatter": "ms-python.autopep8",
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": "explicit"
-        },
-    },
-    "isort.args": [
-        "--profile",
-        "black",
-        "--line-length",
-        "79",
-        "--skip-glob",
-        "[!(stock_backend|tests)]*"
-    ],
 }
