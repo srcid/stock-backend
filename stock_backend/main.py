@@ -48,3 +48,22 @@ def create_user(user: UserScheme, session: Session = Depends(get_session)):
 
     session.refresh(db_user)
     return db_user
+
+
+@app.put('/user/{user_id}', status_code=200, response_model=UserPublicScheme)
+def update_user(
+    user_id: int, user: UserScheme, session: Session = Depends(get_session)
+):
+    db_user: User = session.scalar(select(User).where(User.id == user_id))
+
+    if not db_user:
+        raise HTTPException(status_code=404, detail='User not found')
+
+    db_user.username = user.username
+    db_user.email = user.email
+    db_user.password = user.password
+
+    session.commit()
+    session.refresh(db_user)
+
+    return db_user
