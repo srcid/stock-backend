@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+from http import HTTPStatus as st
 
 from stock_backend.main import app
 from stock_backend.schemes import UserPublicScheme, UserScheme
@@ -70,3 +71,16 @@ def test_update_user_with_non_existing_id(client, user):
     res = client.put(f'/user/99999', json=altered_user_dict)
 
     assert res.status_code == 404
+
+
+def test_delete_user(client, user):
+    res = client.delete(f'/user/{user.id}')
+
+    assert res.status_code == st.OK
+    assert res.json() == {'text': 'User was deleted'}
+
+
+def test_delete_non_existing_user(client):
+    res = client.delete('/user/99999')
+
+    assert res.status_code == st.NOT_FOUND
